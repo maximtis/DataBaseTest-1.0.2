@@ -1,0 +1,407 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="DataBaseTest.MainWindow"
+        Title="MainWindow" MouseDown="Window_MouseDown" WindowStyle="None" ResizeMode="NoResize" Height="600" Width="1000">
+    <Window.Resources>
+        <Storyboard x:Key="Grid_Menu_Slide_Right">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Grid_Menu">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="125"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Grid_Menu">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Grid_Content">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="151.005"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Grid_Content">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Grid_Menu">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="Grid_Content">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.KernelType)" Storyboard.TargetName="Grid_Content">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static KernelType.Gaussian}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static KernelType.Gaussian}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Grid_Menu_Slide_Left">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Grid_Menu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="124.917"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Grid_Menu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Grid_Menu">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="Grid_Content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="150"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="Grid_Content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="Grid_Content">
+                <EasingDoubleKeyFrame KeyTime="0" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.KernelType)" Storyboard.TargetName="Grid_Content">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static KernelType.Gaussian}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static KernelType.Gaussian}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Grid x:Name="Grid_Wrapper" Background="AntiqueWhite">
+        <Grid x:Name="Grid_Content" Visibility="Visible" RenderTransformOrigin="0.5,0.5" Margin="0,50,0,0">
+            <Grid.Effect>
+                <BlurEffect Radius="0" KernelType="Box"/>
+            </Grid.Effect>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid x:Name="Grid_Authorization" Visibility="Hidden"
+				Width="1000"
+				Height="550" Background="#FFDA12AD" >
+                <Label Content=" Авторизация"
+                       FontSize="45"
+					FontFamily="Calibri"
+                    Foreground="White"  
+                    HorizontalAlignment="Left" 
+					Margin="49,10,0,0" 
+					VerticalAlignment="Top" Width="283"/>
+                <TextBox x:Name="TextBox_Login"
+					HorizontalAlignment="Left" 
+					Height="24" 
+					Margin="407,164,0,0" 
+					TextWrapping="Wrap" 
+					Text=""
+					VerticalAlignment="Top"
+					Width="183"/>
+                <PasswordBox x:Name="PasswordBox_Password"
+					HorizontalAlignment="Left" 
+					Margin="407,230,0,0" 
+					VerticalAlignment="Top" 
+					Height="24"
+					Width="183"/>
+                <Button x:Name="Button_EnterToPersonalSpace"
+					Content="Войти" 
+					Cursor="Hand"
+                        FontSize="20"
+					BorderThickness="0"
+					Foreground="White"
+					HorizontalAlignment="Left"
+                    Background="Transparent"
+                    Margin="469,291,0,0"
+					VerticalAlignment="Top" 
+					Width="120"
+					Height="28" 
+                        Style="{DynamicResource ButtonWinStyle}"
+					Click="Button_EnterToPersonalSpace_Click" 
+					/>
+                <Border x:Name="Border_GrayWallTransparent" Visibility="Hidden"
+					Opacity="0"
+					Background="black"/>
+                <Border x:Name="Border_Connecting_and_login"
+					Background="CadetBlue"
+                    
+					VerticalAlignment="Bottom"
+					HorizontalAlignment="Center"
+					MinWidth="300"
+					MinHeight="100" Height="88" Margin="350,0,350,-100">
+                    <Label Foreground="White" x:Name="Label_ConnectionInfo"  Content="Connecting to server..."/>
+                </Border>
+                <Label Content="Имя учетной записи" FontSize="20"
+					FontFamily="Calibri"
+                    Foreground="White"  
+                       HorizontalAlignment="Left" 
+                       Margin="407,125,0,0" 
+                       VerticalAlignment="Top"/>
+                <Label Content="Пароль" FontSize="20"
+					FontFamily="Calibri"
+                    Foreground="White"  
+                       HorizontalAlignment="Left"
+                       Margin="463,193,0,0"
+                       VerticalAlignment="Top"/>
+            </Grid>
+            <Grid x:Name="Grid_PersonalSpace" Visibility="Hidden"
+				Width="1000"
+                  Background="DarkBlue"
+				Height="550" >
+
+                <GroupBox FontFamily="Arial"
+                          Header="Действия"
+                          Foreground="White"
+                          HorizontalAlignment="Left" 
+                          Margin="596,0,0,0" 
+                          VerticalAlignment="Top"
+                          Height="113" Width="394">
+                    <Grid Background="White" Margin="0,0,0,-1">
+                        <Button x:Name="Button_SendMessage"
+							Cursor="Hand"
+							FontFamily="Arial" 
+							BorderThickness="0" 
+							Background="CadetBlue" 
+							Foreground="White"
+							Content="Сообщение" 
+							HorizontalAlignment="Left" 
+							Margin="28,10,0,0" 
+							VerticalAlignment="Top" 
+							Style="{DynamicResource CustomButton}"
+							Width="75" 
+							Height="20" Click="Button_SendMessage_Click"/>
+                        <Button x:Name="Button_ShowInfo"
+							FontFamily="Arial" 
+							BorderThickness="0"
+							Background="CadetBlue" 
+							Foreground="White"
+							Content="Информация"
+							HorizontalAlignment="Left" 
+							Style="{DynamicResource CustomButton}"
+							Margin="149,10,0,0" 
+							VerticalAlignment="Top"
+							Width="93"
+							Height="20" Click="Button_ShowInfo_Click" Cursor="Hand"/>
+                        <Button x:Name="Button_SendReport"
+							FontFamily="Arial" 
+							BorderThickness="0"
+							Background="CadetBlue"
+							Foreground="White"
+							Content="Репорт"
+							Style="{DynamicResource CustomButton}"
+							HorizontalAlignment="Left"
+							Margin="285,10,0,0" 
+							VerticalAlignment="Top"
+							Width="75"
+							Height="20" Cursor="Hand" Click="Button_SendReport_Click" />
+                        <Image Margin="166,32,154,10" Source="windows8-app-data-backup4.png" Stretch="Fill"/>
+                        <Image Margin="45,35,295,15" Source="Messages.png" Stretch="Fill"/>
+                        <Image Margin="296,35,35,15" Source="3-ways-to-advance-the-retrofit-market-1372983993140.jpg" Stretch="Fill"/>
+                    </Grid>
+                </GroupBox>
+                <TextBlock x:Name="Text_Block_Guide" 
+					HorizontalAlignment="Left"
+					Margin="468,187,0,0"
+                           Foreground="White"
+                           FontFamily="Calibri"
+					TextWrapping="Wrap"
+					VerticalAlignment="Top"
+					Height="268" 
+					Width="501"><Run Text="&#x9;&#x9;&#x9;"/><Run Language="ru-ru" Text=" Дорогие одногрупники!"/><LineBreak/><Run Text="  -&gt; "/><Run Language="ru-ru" Text="Программа в эксперементальном режиме."/><Run Text=" &#x9;&#x9;    "/><LineBreak/><Run Language="ru-ru" Text="Если у вас что то не работает, напишите мне в &quot;Репорт&quot;."/><LineBreak/><Run Language="ru-ru" Text="  -"/><Run Text="&gt;"/><Run Language="ru-ru" Text="  &quot;Сообщение&quot; - Отправляйте мне сообщение с указанием когда и почему вас не будет или не было, мне нужно это для отчетов преподам."/><Run Text=" ("/><Run Language="ru-ru" Text="Давайте без матюков "/><Run Text="^^,)"/><LineBreak/><Run Language="ru-ru" Text="  "/><Run Text="-&gt;"/><Run Language="ru-ru" Text="  &quot;Информация&quot; - Заполните пожалуйста свои контактные данные, и нажмите &quot;Отправить&quot;. В этом же разделе у вас будет персональная информация, что от кого требуется."/><LineBreak/><Run Text="  "/><Run Language="ru-ru" Text="-"/><Run Text="&gt; "/><Run Language="ru-ru" Text="&quot;Новости&quot; - Тут будет отображатся важная для группы информация."/><LineBreak/><Run Text="  -&gt; "/><Run Language="ru-ru" Text="После первой авторизации данные сохраняются, для того что бы отменить  авторизацию, удалите файл "/><Run Text="storage.bin"/><Run Language="ru-ru" Text=" из папки "/><Run Text="bin"/><Run Language="ru-ru" Text=", в корне программы."/><LineBreak/><Run Language="ru-ru" Text="  -"/><Run Text="&gt; "/><Run Language="ru-ru" Text="В левой части окна есть &quot;Меню&quot;, пока правда там ничего нет."/><LineBreak/><Run Language="ru-ru" Text="&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;"/><Run Text="&#x9;&#x9;"/><Run Language="ru-ru"/><LineBreak/><Run Language="ru-ru" Text="&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Спасибо."/><LineBreak/><Run Language="ru-ru" Text="&#x9;Ваш староста Максим Тищенко."/></TextBlock>
+                <Label HorizontalAlignment="Left" Margin="105,10,0,0" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" 
+                	Height="50"
+                	BorderThickness="0"
+                	Focusable="False"
+                	Margin="59,11,0,0"
+                	TextWrapping="Wrap"
+                	FontSize="45"
+                	Foreground="White"
+                	Background="Transparent"
+                	FontFamily="Calibri"
+                	Text="Личный кабинет" 
+                	VerticalAlignment="Top"
+                	Width="337"/>
+            </Grid>
+            <Grid x:Name="Grid_Admin" Visibility="Visible"
+				Width="1000"
+				Height="550" Margin="0,0,0,50" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="Button_InitializeEntry" Style="{DynamicResource CustomButton}" Content="Загрузить список группы"  HorizontalAlignment="Left" Margin="68,20,0,0" VerticalAlignment="Top" Width="151" Click="InitializeEntry_Click"/>
+                <Button x:Name="Button_SelectPerson" Content="Открыть профиль" Style="{DynamicResource CustomButton}" HorizontalAlignment="Left" Margin="68,43,0,0" VerticalAlignment="Top" Width="116" Click="Button_SelectPerson_Click"/>
+                <Button x:Name="Button_ClearEntry" Content="Очистить список" Style="{DynamicResource CustomButton}" HorizontalAlignment="Left" Margin="68,104,0,0" VerticalAlignment="Top" Width="116" Click="Button_ClearEntry_Click"/>
+                <GroupBox Header="Вариант загрузки" HorizontalAlignment="Left" Margin="224,10,0,0" VerticalAlignment="Top" Height="83" Width="130">
+                    <Grid>
+                        <RadioButton x:Name="RadioButton_FromBase" Content="Из базы" IsChecked="True" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <RadioButton Content="Из файла"  HorizontalAlignment="Left" Height="24" Margin="10,35,0,0" VerticalAlignment="Top"/>
+                    </Grid>
+                </GroupBox>
+                <ListBox x:Name="ListBox_MembersVisualizator" HorizontalAlignment="Left" Height="423" Margin="633,10,0,0" VerticalAlignment="Top" Width="194"/>
+                <Button x:Name="Button_LookMessage" Content="Сообщения" HorizontalAlignment="Left" Style="{DynamicResource CustomButton}" Margin="68,66,0,0" VerticalAlignment="Top" Width="116" Height="18" Click="Button_LookMessage_Click"/>
+                <ListBox x:Name="ListBox_MessageVisualizator" HorizontalAlignment="Left" Height="423" Margin="846,10,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBox Name="TextBox_NewsName" HorizontalAlignment="Left" Height="23" Margin="68,171,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" Width="120"/>
+                <TextBox Name="TextBox_NewsContent" HorizontalAlignment="Left" Height="23" Margin="68,199,0,0" TextWrapping="Wrap" Text="Контент" VerticalAlignment="Top" Width="120"/>
+                <TextBox Name="TextBox_NewsAuthor" HorizontalAlignment="Left" Height="23" Margin="68,227,0,0" TextWrapping="Wrap" Text="Автор" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Добавить новость" HorizontalAlignment="Left" Margin="68,145,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="TextBox_ImgSource" HorizontalAlignment="Left" Height="23" Margin="68,255,0,0" TextWrapping="Wrap" Text="Адрес картинки" VerticalAlignment="Top" Width="120"/>
+                <Button Name="Button_PostNews" Style="{DynamicResource CustomButton}" Content="Опубликовать" HorizontalAlignment="Left" Margin="68,283,0,0" VerticalAlignment="Top" Width="91" Click="Button_PostNews_Click"/>
+
+            </Grid>
+            <Grid x:Name="Grid_News" Visibility="Visible"
+				Width="1000" Background="BlueViolet"
+				Height="550" RenderTransformOrigin="0.5,0.5">
+                <Border BorderThickness="0" Name="StackPanel_NewsNodeElement" BorderBrush="White"  Margin="142,46,378,76">
+                    <Canvas Name="TestCanvas" HorizontalAlignment="Left" Height="382" Margin="7,7,0,0" VerticalAlignment="Top" Width="426">
+                        <Image Name="SourceImg" Stretch="UniformToFill" Height="244" Width="369" Canvas.Left="25" Canvas.Top="25"/>
+                        <TextBox IsReadOnly="True" Foreground="White" BorderThickness="0" Name="ContentField" Background="Transparent" KeyboardNavigation.AcceptsReturn="True" KeyboardNavigation.TabNavigation="Local" TextWrapping="Wrap" Text="Content" Height="74" Width="369" Canvas.Left="25" Canvas.Top="274"/>
+                        <TextBox IsReadOnly="True" Foreground="White" BorderThickness="0" Name="Author" Background="Transparent" Canvas.Left="25" TextWrapping="Wrap" Text="Author" Canvas.Top="351" Width="241"/>
+                        <TextBox IsReadOnly="True" Foreground="White" BorderThickness="0" Name="Date" Background="Transparent" Canvas.Left="316" TextWrapping="Wrap" Text="Date" Canvas.Top="351" Width="78" />
+                    </Canvas>
+                </Border>
+
+                <ListBox x:Name="ListBox_NewsFeed" 
+                         
+							Background="Transparent"
+							Foreground="White"
+                         BorderBrush="White"
+                         BorderThickness="0"
+							HorizontalAlignment="Left"
+							Height="123" 
+							VerticalAlignment="Top" 
+							Width="171" 
+							Margin="707,55,0,0" Cursor="Hand" SelectionChanged="ListBox_NewsFeed_SelectionChanged"/>
+                <Button x:Name="Button_News_Updater"
+							Content="Обновить"
+							Height="36"
+							Background="Transparent"
+                            Foreground="White"
+                            FontSize="20"
+                            BorderThickness="0"
+                            BorderBrush="White"
+							HorizontalAlignment="Left"
+							Margin="763,424,0,0"
+							VerticalAlignment="Top" 
+							Width="128" Click="Button_News_Updater_Click" Cursor="Hand" Style="{DynamicResource ButtonWinStyle}"/>
+                <TextBox HorizontalAlignment="Left" 
+                         Height="50"
+                         BorderThickness="0"
+                         Focusable="False"
+                         Margin="59,11,0,0"
+                         TextWrapping="Wrap"
+                         FontSize="45"
+                         Foreground="White"
+                         Background="Transparent"
+                         FontFamily="Calibri"
+                         Text="Новости" 
+                         VerticalAlignment="Top"
+                         Width="167"/>
+                <Label Content="Последние новости"
+                       HorizontalAlignment="Left" 
+                       Background="Transparent"
+                       Foreground="White"
+                       FontFamily="Calibri"
+                       FontSize="16"
+                       Margin="729,24,0,0" 
+                       VerticalAlignment="Top"/>
+
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="Grid_Menu" Visibility="Visible"
+              Opacity="1"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Background="CadetBlue"
+			Margin="-125,50,0,0" Height="512" Width="151" RenderTransformOrigin="0.5,0.5" >
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <ei:ControlStoryboardAction Storyboard="{StaticResource Grid_Menu_Slide_Right}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <ei:ControlStoryboardAction Storyboard="{StaticResource Grid_Menu_Slide_Left}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Button x:Name="Button_Menu_Login"
+				Foreground="White"
+                    BorderThickness="0"
+                    FontSize="18"
+                    Background="Transparent"
+				Content="Личный кабинет" 
+				HorizontalAlignment="Left"
+				Style="{DynamicResource ButtonWinStyle}"
+				Margin="6,10,0,0"
+				VerticalAlignment="Top"
+				Width="140" Height="30" Click="Button_Menu_Login_Click" Cursor="Hand"/>
+            <Button x:Name="Button_Menu_General"
+				Foreground="White"
+				Content="Главная  " 
+                    FontSize="21"
+				HorizontalAlignment="Left" 
+				Margin="10,45,0,0" 
+                Background="Transparent"
+				BorderThickness="0"
+				VerticalAlignment="Top" 
+				Style="{DynamicResource ButtonWinStyle}"
+				Width="110" 
+				Height="30"
+				Click="Button_Menu_General_Click" Cursor="Hand"/>
+            <Button x:Name="Button_Menu_Chat"
+				Foreground="White"
+                    FontSize="20"
+                    BorderThickness="0"
+				Content="Чат          " 
+				HorizontalAlignment="Left" 
+				Margin="10,80,0,0" 
+				VerticalAlignment="Top" 
+                    Background="Transparent"
+				Style="{DynamicResource ButtonWinStyle}"
+				Width="110" 
+				Height="30"
+				Click="Button_Menu_Chat_Click" Cursor="Hand"/>
+            <Button x:Name="Button_Menu_Admin_Panel"
+				Foreground="White"
+				BorderThickness="0"
+                    FontSize="21"
+                    Background="Transparent"
+                    Style="{DynamicResource ButtonWinStyle}"
+				Content="Админ    " 
+				HorizontalAlignment="Left" 
+				Margin="10,115,0,0" 
+				VerticalAlignment="Top" 
+				
+				Width="110" 
+				Height="30"
+				Cursor="Hand" Click="Button_Menu_Admin_Panel_Click"/>
+            <Button Name="Button_Menu_News"
+                    Content="Новости  "
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    Foreground="White"
+                    FontSize="20"
+                    BorderThickness="0"
+                    Style="{DynamicResource ButtonWinStyle}"
+                    Height="30" 
+                    Margin="10,150,0,0" 
+                    VerticalAlignment="Top"
+                    Width="110" Click="Button_Menu_News_Click" />
+        </Grid>
+        <Grid x:Name="Grid_NavigationBar" Visibility="Visible"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			MinWidth="1000"
+			MinHeight="50"
+			Background="Coral">
+            <Button x:Name="Button_Close" BorderThickness="0" Background="IndianRed" Foreground="White" Content="Закрыть" HorizontalAlignment="Left" Margin="905,0,0,0" VerticalAlignment="Top" Width="75" Click="Button_Close_Click"/>
+            <Label Content="Fancy Client v 1.1.1" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" Width="119"/>
+
+        </Grid>
+        <StatusBar x:Name="StatusBar_Dock" Background="CadetBlue"   HorizontalAlignment="Left" Height="38" Margin="0,562,0,0" VerticalAlignment="Top" Width="1000">
+            <TextBox x:Name="FNBox" Visibility="Hidden" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+            <TextBox x:Name="LNBox" Visibility="Hidden" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+            <TextBox x:Name="EmailBox" Visibility="Hidden" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+            <TextBox x:Name="PhoneBox" Visibility="Hidden" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+            <TextBox x:Name="DateTimeBox" Visibility="Hidden" IsReadOnly="True" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+        </StatusBar>
+
+
+    </Grid>
+</Window>
